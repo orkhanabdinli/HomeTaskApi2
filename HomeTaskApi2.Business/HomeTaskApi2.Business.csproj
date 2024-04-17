@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
     <Folder Include="CustomExceptions\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Services\Interfaces\" />
-    <Folder Include="Services\Implementations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HomeTaskApi2.Data\HomeTaskApi2.Data.csproj" />
   </ItemGroup>
 
 </Project>
