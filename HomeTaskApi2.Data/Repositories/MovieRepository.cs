@@ -4,9 +4,9 @@ using HomeTaskApi2.Data.Contexts;
 
 namespace HomeTaskApi2.Data.Repositories;
 
-public class GenreRepository : GenericRepository<Genre>, IGenreRepository
+public class MovieRepository : GenericRepository<Movie>, IMovieRepository
 {
-    public GenreRepository(HomeTaskApi2DbContext context) : base(context)
+    public MovieRepository(HomeTaskApi2DbContext context) : base(context)
     {
     }
 }

@@ -2,6 +2,7 @@
 using HomeTaskApi2.Business.Services.Interfaces;
 using HomeTaskApi2.Core.Entities;
 using HomeTaskApi2.Core.Repositories;
+using HomeTaskApi2.Data.Contexts;
 
 namespace HomeTaskApi2.Business.Services.Implementations;
 
@@ -39,5 +40,39 @@ public class GenreService : IGenreService
             Name = genre.Name
         };
         return genreGetDTO;
+    }
+
+    public async Task Create(GenrePostDTO genrePostDTO)
+    {
+        Genre genre = new Genre()
+        {
+            Name = genrePostDTO.Name,
+            IsDeleted = genrePostDTO.IsDeleted,
+            CreatedDate = DateTime.UtcNow.AddHours(4),
+            UpdatedDate = DateTime.UtcNow.AddHours(4)
+        };
+        await _genreRepository.InsertAsync(genre);
+        await _genreRepository.CommitAsync();
+    }
+    public async Task Update(int id, GenrePutDTO genrePutDTO)
+    {
+        var genre = await _genreRepository.GetByIdAsync(id);
+        if (genre is null) 
+            throw new Exception("");
+
+        genre.Name = genrePutDTO.Name;
+        genre.IsDeleted = genrePutDTO.IsDeleted;
+        genre.UpdatedDate = DateTime.UtcNow.AddHours(4);
+
+        await _genreRepository.CommitAsync();
+    }
+    public async Task Delete(int id)
+    {
+        var genre = await _genreRepository.GetByIdAsync(id);
+        if (genre is null) 
+            throw new Exception("");
+
+        _genreRepository.Delete(genre);
+        await _genreRepository.CommitAsync();
     }
 }
